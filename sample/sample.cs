@@ -13,7 +13,7 @@ public class MyApp : wxApp {
         return base.OnInit ();
     }
 
-    public overrite int OnExit ()
+    public override int OnExit ()
     {
         Console.WriteLine ("C# OnExit called!");
         return base.OnExit ();
