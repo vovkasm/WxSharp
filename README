@@ -1,16 +1,23 @@
 
-== MacOS ==
+== MacOS, Linux and other *nix ==
 === Build ===
-1. Install wxWdigets
-2. Build project
+1. Install mono
+2. Install wxWdigets
+3. Build project
   > mkdir build && cd build
   > cmake ..
   > make
 
+=== Install Mono on MacOS ===
+Mono for MacOS can be downloded with Xamarin Studio from https://xamarin.com/download
+Another way (not tested), is install with Homebrew
+> brew install mono
+
 === Install wxWidgets on MacOS ===
 > brew install wxmac
 
-=== Build wxWidgets by hand ===
+=== Build wxWidgets by hand on MacOS ===
+This shouldn't be needed as wxmac from Homebrew with universal libs (i386 and x86_64) and so can be used with 32 bit mono from Xamarin Studio.
 > git clone git@github.com:wxWidgets/wxWidgets.git
 > cd wxWidgets
 > git checkout WX_3_0_BRANCH
