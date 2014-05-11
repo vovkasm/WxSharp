@@ -1,5 +1,5 @@
 using System;
-using org.vovkasm;
+using org.vovkasm.wx;
 
 public class MyApp : wxApp {
     public override bool OnInit ()
@@ -7,20 +7,22 @@ public class MyApp : wxApp {
         Console.WriteLine ("C# OnInit called!");
         return base.OnInit ();
     }
-    public override int OnRun ()
-    {
-        Console.WriteLine ("C# OnRun called!");
-        return base.OnRun ();
-    }
 }
 
 public class WxNetSample
 {
     static public void Main ()
     {
+        string[] args = new string[0];
         MyApp app = new MyApp();
-        Console.WriteLine ("Start MainLoop");
-        app.MainLoop ();
+
+        MyApp.SetInstance(app);
+        bool ret = wxsharpglue.wxEntry(args);
+        if (ret)
+            Console.WriteLine ("wxEntry return true, ok");
+        else
+            Console.WriteLine ("wxEntry return false, something bad");
+
         Console.WriteLine ("The end!");
     }
 

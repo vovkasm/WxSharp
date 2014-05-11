@@ -1,0 +1,18 @@
+
+== MacOS ==
+=== Build ===
+1. Install wxWdigets
+2. Build project
+  > mkdir build && cd build
+  > cmake ..
+  > make
+
+=== Install wxWidgets on MacOS ===
+> brew install wxmac
+
+=== Build wxWidgets by hand ===
+> git clone git@github.com:wxWidgets/wxWidgets.git
+> cd wxWidgets
+> git checkout WX_3_0_BRANCH
+> mkdir build && cd build
+> ../configure --enable-universal-binary=i386,x86_64 --enable-debug --enable-monolithic

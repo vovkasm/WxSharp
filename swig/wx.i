@@ -1,7 +1,31 @@
-%module wxsharpglue
+%module(directors="1") wxsharpglue
 %{
 #include <wx/wx.h>
 %}
+
+%include wchar.i
+%include typemaps.i
+
+typedef wchar_t __WCHAR_TYPE__;
+%import wx/setup.h
+%import wx/chartype.h
+
+%include arrays_csharp.i
+
+CSHARP_ARRAYS(wxChar*, string)
+%typemap(imtype, inattributes="[In, MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0, ArraySubType=UnmanagedType.LPStr)]") wxChar *INPUT[] "string[]"
+
+%apply wxChar *INPUT[] { wxChar** argv }
+
+%pragma(csharp) modulecode = %{
+    public static bool wxEntry(string[] argv)
+    {
+        return wxEntry(argv.Length, argv);
+    }
+%}
+
+bool wxEntry(int argc, wxChar** argv);
+
 %feature("director") wxAppConsole;
 %feature("director") wxApp;
 class wxAppConsole
@@ -24,5 +48,8 @@ public:
     //virtual wxVideoMode GetDisplayMode() const;
     bool GetExitOnFrameDelete() const;
     virtual bool IsActive() const;
+
+    static void SetInstance(wxAppConsole* app);
+    static wxAppConsole* GetInstance();
 };
 

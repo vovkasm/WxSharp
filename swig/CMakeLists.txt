@@ -9,7 +9,7 @@ include(${SWIG_USE_FILE})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-set(CMAKE_SWIG_FLAGS "-namespace" "org.vovkasm")
+set(CMAKE_SWIG_FLAGS "-namespace" "org.vovkasm.wx" "-DSWIG2_CSHARP")
 
 set_source_files_properties(wx.i PROPERTIES CPLUSPLUS ON)
 
