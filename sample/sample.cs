@@ -9,7 +9,14 @@ public class MyApp : wxApp {
         Console.WriteLine ("C# OnInit called!");
         main_window = new wxFrame(null, -1, "Hello from C#");
         main_window.Show ();
+        SetTopWindow (main_window);
         return base.OnInit ();
+    }
+
+    public overrite int OnExit ()
+    {
+        Console.WriteLine ("C# OnExit called!");
+        return base.OnExit ();
     }
 }
 

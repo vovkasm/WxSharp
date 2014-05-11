@@ -52,6 +52,8 @@ public:
     //virtual wxVideoMode GetDisplayMode() const;
     bool GetExitOnFrameDelete() const;
     virtual bool IsActive() const;
+    virtual wxWindow* GetTopWindow() const;
+    void SetTopWindow(wxWindow* window);
 
     static void SetInstance(wxAppConsole* app);
     static wxAppConsole* GetInstance();
