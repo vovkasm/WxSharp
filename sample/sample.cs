@@ -2,9 +2,13 @@ using System;
 using org.vovkasm.wx;
 
 public class MyApp : wxApp {
+    public wxFrame main_window = null;
+
     public override bool OnInit ()
     {
         Console.WriteLine ("C# OnInit called!");
+        main_window = new wxFrame(null, -1, "Hello from C#");
+        main_window.Show ();
         return base.OnInit ();
     }
 }

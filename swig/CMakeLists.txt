@@ -13,6 +13,7 @@ set(CMAKE_SWIG_FLAGS "-namespace" "org.vovkasm.wx" "-DSWIG2_CSHARP")
 
 set_source_files_properties(wx.i PROPERTIES CPLUSPLUS ON)
 
+set(SWIG_MODULE_wxsharpglue_EXTRA_DEPS defs.i frame.i gdicmn.i nonownedwnd.i toplevel.i window.i wxstring.i)
 SWIG_ADD_MODULE(wxsharpglue csharp wx.i)
 SWIG_LINK_LIBRARIES(wxsharpglue ${wxWidgets_LIBRARIES})
 

@@ -17,6 +17,8 @@ CSHARP_ARRAYS(wxChar*, string)
 
 %apply wxChar *INPUT[] { wxChar** argv }
 
+%include wxstring.i
+
 %pragma(csharp) modulecode = %{
     public static bool wxEntry(string[] argv)
     {
@@ -25,6 +27,8 @@ CSHARP_ARRAYS(wxChar*, string)
 %}
 
 bool wxEntry(int argc, wxChar** argv);
+
+// interface/app.h
 
 %feature("director") wxAppConsole;
 %feature("director") wxApp;
@@ -53,3 +57,19 @@ public:
     static wxAppConsole* GetInstance();
 };
 
+// interface/windowid.h
+
+typedef int wxWindowID;
+
+// interface/defs.h
+%include defs.i
+// interface/gdicmn.h
+%include gdicmn.i
+// interface/window.h
+%include window.i
+// interface/nonownedwnd.h
+%include nonownedwnd.i
+// interface/toplevel.h
+%include toplevel.i
+// interface/frame.h
+%include frame.i
