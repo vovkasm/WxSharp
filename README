@@ -3,7 +3,8 @@
 === Build ===
 1. Install mono
 2. Install wxWdigets
-3. Build project
+3. Install SWIG
+4. Build project
   > mkdir build && cd build
   > cmake ..
   > make
@@ -23,3 +24,7 @@ This shouldn't be needed as wxmac from Homebrew with universal libs (i386 and x8
 > git checkout WX_3_0_BRANCH
 > mkdir build && cd build
 > ../configure --enable-universal-binary=i386,x86_64 --enable-debug --enable-monolithic
+> make && make install
+
+=== Install SWIG on MacOS ===
+> brew install swig
