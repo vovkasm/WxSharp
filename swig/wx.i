@@ -75,3 +75,11 @@ typedef int wxWindowID;
 %include toplevel.i
 // interface/frame.h
 %include frame.i
+// interface/validate.h
+%include validate.i
+// interface/control.h
+%include control.i
+// interface/anybutton.h
+%include anybutton.i
+// interface/button.h
+%include button.i

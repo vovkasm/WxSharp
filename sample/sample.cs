@@ -3,11 +3,15 @@ using org.vovkasm.wx;
 
 public class MyApp : wxApp {
     public wxFrame main_window = null;
+    public wxButton btn1 = null;
 
     public override bool OnInit ()
     {
         Console.WriteLine ("C# OnInit called!");
-        main_window = new wxFrame(null, -1, "Hello from C#");
+        main_window = new wxFrame(null, (int)wxStandardID.wxID_ANY, "Hello from C#");
+
+        btn1 = new wxButton( main_window, (int)wxStandardID.wxID_HIGHEST, "Click me", wxsharpglue.wxDefaultPosition, wxsharpglue.wxDefaultSize, 0 );
+
         main_window.Show ();
         SetTopWindow (main_window);
         return base.OnInit ();
