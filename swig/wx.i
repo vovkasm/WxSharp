@@ -28,58 +28,22 @@ CSHARP_ARRAYS(wxChar*, string)
 
 bool wxEntry(int argc, wxChar** argv);
 
-// interface/app.h
-
-%feature("director") wxAppConsole;
-%feature("director") wxApp;
-class wxAppConsole
-{
-public:
-    virtual ~wxAppConsole();
-    
-    virtual int MainLoop();
-    virtual void ExitMainLoop();
-    virtual int OnExit();
-    virtual bool OnInit();
-    virtual int OnRun();
-};
-
-class wxApp : public wxAppConsole
-{
-public:
-    wxApp();
-    virtual ~wxApp();
-    //virtual wxVideoMode GetDisplayMode() const;
-    bool GetExitOnFrameDelete() const;
-    virtual bool IsActive() const;
-    virtual wxWindow* GetTopWindow() const;
-    void SetTopWindow(wxWindow* window);
-
-    static void SetInstance(wxAppConsole* app);
-    static wxAppConsole* GetInstance();
-};
-
 // interface/windowid.h
 
 typedef int wxWindowID;
 
-// interface/defs.h
+// complements to files in wxWindows sources in interface directory
 %include defs.i
-// interface/gdicmn.h
 %include gdicmn.i
-// interface/window.h
+%include object.i
+%include eventfilter.i
+%include event.i
+%include app.i
 %include window.i
-// interface/nonownedwnd.h
 %include nonownedwnd.i
-// interface/toplevel.h
 %include toplevel.i
-// interface/frame.h
 %include frame.i
-// interface/validate.h
 %include validate.i
-// interface/control.h
 %include control.i
-// interface/anybutton.h
 %include anybutton.i
-// interface/button.h
 %include button.i
