@@ -28,6 +28,7 @@ set(SWIG_MODULE_wxsharpglue_EXTRA_DEPS
     toplevel.i
     validate.i
     window.i
+    wx_typemaps.i
     wxstring.i
     )
 SWIG_ADD_MODULE(wxsharpglue csharp wx.i)

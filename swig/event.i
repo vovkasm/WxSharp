@@ -37,9 +37,63 @@ public:
     int StopPropagation();
 };
 
+%{
+template <typename T>
+class EventPHandler {
+public:
+    typedef std::function<void(T*)> PFunc;
+    EventPHandler(PFunc func) : _func(func) { }
+    void operator()(T& event) {
+        _func(&event);
+    }
+private:
+    PFunc _func;
+};
+%}
+
+%define %cs_callback(TYPE, CSTYPE)
+    %typemap(ctype) TYPE, TYPE& "void*"
+    %typemap(in) TYPE  %{ $1 = ($1_type)$input; %}
+    %typemap(in) TYPE& %{ $1 = ($1_type)&$input; %}
+    %typemap(imtype, out="global::System.IntPtr") TYPE, TYPE& "CSTYPE"
+    %typemap(cstype, out="global::System.IntPtr") TYPE, TYPE& "CSTYPE"
+    %typemap(csin) TYPE, TYPE& "$csinput"
+%enddef
+
+%{
+typedef void (SWIGSTDCALL *wxCommandEventCallback)(wxCommandEvent*);
+%}
+typedef void (*wxCommandEventCallback)(wxCommandEvent*);
+%pragma(csharp) modulecode=%{
+    public delegate void CommandEventCallback(wxCommandEvent arg);
+%}
+
+%cs_callback(wxCommandEventCallback, wxsharpglue.CommandEventCallback);
+
+%typemap(cscode) wxEvtHandler %{
+    public void BindCommandEvent(wxsharpglue.CommandEventCallback handler) {
+        Action<IntPtr> realHandler = delegate(IntPtr arg) {
+            wxCommandEvent ev = new wxCommandEvent(arg, true);
+            handler(ev);
+        };
+        IntPtr realHandlerPtr = Marshal.GetFunctionPointerForDelegate(realHandler);
+        BindCommandEventInternal(new SWIGTYPE_p_void(realHandlerPtr, false), -1, -1);
+    }
+%}
+
 class wxEvtHandler : public wxObject
 {
 public:
+
+%extend {
+    #include <functional>
+    void BindCommandEventInternal(void *handler, int id = wxID_ANY, int lastId = wxID_ANY) {
+        wxCommandEventCallback cb = (wxCommandEventCallback)handler;
+        EventPHandler<wxCommandEvent> fn(cb);
+        $self->Bind(wxEVT_BUTTON, fn, id, lastId);
+    }
+}
+
     wxEvtHandler();
     virtual ~wxEvtHandler();
     virtual void QueueEvent(wxEvent *event);
@@ -763,8 +817,7 @@ enum wxMouseWheelAxis
 
     @see wxKeyEvent
 */
-class wxMouseEvent : public wxEvent,
-                     public wxMouseState
+class wxMouseEvent : public wxEvent /* TODO, public wxMouseState */
 {
 public:
     /**
@@ -1601,15 +1654,17 @@ public:
 
 typedef int wxEventType;
 
-extern const wxEventType wxEVT_NULL;
-extern const wxEventType wxEVT_ANY;
+#define wxEVT_ANY ((wxEventType)-1)
 
 wxEventType wxNewEventType();
 
 void wxPostEvent(wxEvtHandler* dest, const wxEvent& event);
 void wxQueueEvent(wxEvtHandler* dest, wxEvent *event);
 
-extern const wxEventType wxEVT_BUTTON;
+#define wxDECLARE_EXPORTED_EVENT( name, type ) extern const wxEventTypeTag< type > name
+
+extern const wxEventType wxEVT_NULL;
+
 extern const wxEventType wxEVT_CHECKBOX;
 extern const wxEventType wxEVT_CHOICE;
 extern const wxEventType wxEVT_LISTBOX;
@@ -1729,3 +1784,5 @@ extern const wxEventType wxEVT_HELP;
 extern const wxEventType wxEVT_DETAILED_HELP;
 extern const wxEventType wxEVT_TOOL;
 extern const wxEventType wxEVT_WINDOW_MODAL_DIALOG_CLOSED;
+
+wxDECLARE_EXPORTED_EVENT(wxEVT_BUTTON, wxCommandEvent);

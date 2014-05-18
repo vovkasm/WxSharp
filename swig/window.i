@@ -38,7 +38,7 @@ enum wxWindowVariant
     wxWINDOW_VARIANT_MAX
 };
 
-class wxWindow
+class wxWindow : public wxEvtHandler
 {
 public:
     wxWindow();

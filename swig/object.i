@@ -18,7 +18,7 @@ public:
     wxObject();
     wxObject(const wxObject& other);
     virtual ~wxObject();
-    virtual wxClassInfo* GetClassInfo() const;
+    /* virtual wxClassInfo* GetClassInfo() const; */
     wxObjectRefData* GetRefData() const;
     bool IsKindOf(const wxClassInfo* info) const;
     

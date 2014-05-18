@@ -18,6 +18,7 @@ CSHARP_ARRAYS(wxChar*, string)
 %apply wxChar *INPUT[] { wxChar** argv }
 
 %include wxstring.i
+%include wx_typemaps.i
 
 %pragma(csharp) modulecode = %{
     public static bool wxEntry(string[] argv)
