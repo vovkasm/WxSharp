@@ -3,29 +3,19 @@ using org.vovkasm.wx;
 
 public class MyApp : wxApp {
     public wxFrame main_window = null;
-    public wxButton btn1 = null;
-    public wxButton btnExit = null;
 
     public override bool OnInit ()
     {
         Console.WriteLine ("C# OnInit called!");
         main_window = new wxFrame(null, (int)wxStandardID.wxID_ANY, "Hello from C#");
 
-        btn1 = new wxButton( main_window, (int)wxStandardID.wxID_HIGHEST, "Click me", wxsharpglue.wxDefaultPosition, wxsharpglue.wxDefaultSize, 0 );
-        btn1.BindCommandEvent( OnBtn1Click );
-
-        btnExit = new wxButton( main_window, (int)wxStandardID.wxID_HIGHEST + 1, "Exit", wxsharpglue.wxDefaultPosition, wxsharpglue.wxDefaultSize, 0 );
+        wxButton btnExit = new wxButton( main_window, (int)wxStandardID.wxID_HIGHEST, "Exit" );
         btnExit.BindCommandEvent( OnBtnExitClick );
 
         main_window.Show ();
         SetTopWindow (main_window);
         SetExitOnFrameDelete (true);
         return base.OnInit ();
-    }
-
-    public void OnBtn1Click (wxCommandEvent ev)
-    {
-        Console.WriteLine ("Btn1 clicked!");
     }
 
     public void OnBtnExitClick (wxCommandEvent ev)
@@ -37,7 +27,8 @@ public class MyApp : wxApp {
     public override int OnExit ()
     {
         Console.WriteLine ("C# OnExit called!");
-        return base.OnExit ();
+        //return base.OnExit ();
+        return 1;
     }
 }
 

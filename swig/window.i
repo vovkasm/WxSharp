@@ -41,20 +41,12 @@ enum wxWindowVariant
 class wxWindow : public wxEvtHandler
 {
 public:
-    wxWindow();
     wxWindow(wxWindow* parent, wxWindowID id,
              const wxPoint& pos = wxDefaultPosition,
              const wxSize& size = wxDefaultSize,
              long style = 0,
              const wxString& name = wxPanelNameStr);
     virtual ~wxWindow();
-
-    bool Create(wxWindow *parent,
-                wxWindowID id,
-                const wxPoint& pos = wxDefaultPosition,
-                const wxSize& size = wxDefaultSize,
-                long style = 0,
-                const wxString& name = wxPanelNameStr);
 
     virtual bool AcceptsFocus() const;
     virtual bool AcceptsFocusFromKeyboard() const;

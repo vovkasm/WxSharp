@@ -19,14 +19,13 @@ public:
     wxObject(const wxObject& other);
     virtual ~wxObject();
     /* virtual wxClassInfo* GetClassInfo() const; */
-    wxObjectRefData* GetRefData() const;
-    bool IsKindOf(const wxClassInfo* info) const;
-    
-    bool IsSameAs(const wxObject& obj) const;
-    void Ref(const wxObject& clone);
-    void SetRefData(wxObjectRefData* data);
-    void UnRef();
-    void UnShare();
+    /*bool IsKindOf(const wxClassInfo* info) const ; */
+
+    %extend {
+      const wxChar* GetClassName() const {
+        return $self->GetClassInfo()->GetClassName();
+      }
+    }
 };
 
 class wxClassInfo
