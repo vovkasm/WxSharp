@@ -3,6 +3,8 @@
 #include <wx/wx.h>
 %}
 
+%csconst(1);
+
 %include wchar.i
 %include typemaps.i
 

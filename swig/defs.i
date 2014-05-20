@@ -98,9 +98,9 @@ enum wxBorder
 #define wxSIZE_FORCE            0x0010
 #define wxSIZE_FORCE_EVENT      0x0020
 
-#define wxVSCROLL               0x80000000
-#define wxHSCROLL               0x40000000
-#define wxCAPTION               0x20000000
+#define wxVSCROLL               0x80000000U
+#define wxHSCROLL               0x40000000U
+#define wxCAPTION               0x20000000U
 
 #define wxDOUBLE_BORDER         wxBORDER_DOUBLE
 #define wxSUNKEN_BORDER         wxBORDER_SUNKEN
@@ -219,36 +219,36 @@ enum wxBorder
  */
 
 /*  wxCENTRE already defined as  0x00000001 */
-#define wxYES                   0x00000002
-#define wxOK                    0x00000004
-#define wxNO                    0x00000008
+#define wxYES                   0x00000002U
+#define wxOK                    0x00000004U
+#define wxNO                    0x00000008U
 #define wxYES_NO                (wxYES | wxNO)
-#define wxCANCEL                0x00000010
-#define wxAPPLY                 0x00000020
-#define wxCLOSE                 0x00000040
+#define wxCANCEL                0x00000010U
+#define wxAPPLY                 0x00000020U
+#define wxCLOSE                 0x00000040U
 
-#define wxOK_DEFAULT            0x00000000  /* has no effect (default) */
-#define wxYES_DEFAULT           0x00000000  /* has no effect (default) */
-#define wxNO_DEFAULT            0x00000080  /* only valid with wxYES_NO */
-#define wxCANCEL_DEFAULT        0x80000000  /* only valid with wxCANCEL */
+#define wxOK_DEFAULT            0x00000000U  /* has no effect (default) */
+#define wxYES_DEFAULT           0x00000000U  /* has no effect (default) */
+#define wxNO_DEFAULT            0x00000080U  /* only valid with wxYES_NO */
+#define wxCANCEL_DEFAULT        0x80000000U  /* only valid with wxCANCEL */
 
-#define wxICON_EXCLAMATION      0x00000100
-#define wxICON_HAND             0x00000200
+#define wxICON_EXCLAMATION      0x00000100U
+#define wxICON_HAND             0x00000200U
 #define wxICON_WARNING          wxICON_EXCLAMATION
 #define wxICON_ERROR            wxICON_HAND
-#define wxICON_QUESTION         0x00000400
-#define wxICON_INFORMATION      0x00000800
+#define wxICON_QUESTION         0x00000400U
+#define wxICON_INFORMATION      0x00000800U
 #define wxICON_STOP             wxICON_HAND
 #define wxICON_ASTERISK         wxICON_INFORMATION
 
-#define wxHELP                  0x00001000
-#define wxFORWARD               0x00002000
-#define wxBACKWARD              0x00004000
-#define wxRESET                 0x00008000
-#define wxMORE                  0x00010000
-#define wxSETUP                 0x00020000
-#define wxICON_NONE             0x00040000
-#define wxICON_AUTH_NEEDED      0x00080000
+#define wxHELP                  0x00001000U
+#define wxFORWARD               0x00002000U
+#define wxBACKWARD              0x00004000U
+#define wxRESET                 0x00008000U
+#define wxMORE                  0x00010000U
+#define wxSETUP                 0x00020000U
+#define wxICON_NONE             0x00040000U
+#define wxICON_AUTH_NEEDED      0x00080000U
 
 #define wxICON_MASK \
     (wxICON_EXCLAMATION|wxICON_HAND|wxICON_QUESTION|wxICON_INFORMATION|wxICON_NONE)
