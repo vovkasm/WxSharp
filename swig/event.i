@@ -73,7 +73,7 @@ typedef void (*wxCommandEventCallback)(wxCommandEvent*);
 %typemap(cscode) wxEvtHandler %{
     public void BindCommandEvent(wxsharpglue.CommandEventCallback handler) {
         Action<IntPtr> realHandler = delegate(IntPtr arg) {
-            wxCommandEvent ev = new wxCommandEvent(arg, true);
+            wxCommandEvent ev = new wxCommandEvent(arg, false);
             handler(ev);
         };
         IntPtr realHandlerPtr = Marshal.GetFunctionPointerForDelegate(realHandler);

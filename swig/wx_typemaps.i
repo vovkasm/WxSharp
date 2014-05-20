@@ -6,7 +6,7 @@
 %typemap(csin) (wxEventCallback callback)  "$csinput"
 %typemap(in) (wxEventCallback callback) %{ $1 = ($1_ltype)$input; %}
 
-%typemap(csfinalize) wxApp, wxAppConsole, wxEvtHandler, wxObject, wxEvent, wxCommandEvent, wxAnyButton, wxButton, wxControl, wxFrame, wxNonOwnedWindow, wxTopLevelWindow, wxWindow %{
+%typemap(csfinalize) wxApp, wxAppConsole, wxEvtHandler, wxObject, wxAnyButton, wxButton, wxControl, wxFrame, wxNonOwnedWindow, wxTopLevelWindow, wxWindow %{
   ~$csclassname() {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
