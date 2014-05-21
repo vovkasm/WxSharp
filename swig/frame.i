@@ -50,7 +50,7 @@ public:
 
     void SetStatusBarPane(int n);
     virtual void SetStatusText(const wxString& text, int number = 0);
-    virtual void SetStatusWidths(int n, const int* widths_field);
+    /* TODO arrays virtual void SetStatusWidths(int n, const int* widths_field); */
     /* TODO virtual void SetToolBar(wxToolBar* toolBar); */
 
     void PushStatusText(const wxString &text, int number = 0);

@@ -176,10 +176,12 @@ public:
                 wxObject *userData = NULL );
     */
 
-    void* GetClientData() const;
-    /* TODO wxClientData* GetClientObject() const; */
+    /* TODO Is this api really needed?
+    void* GetClientData() const; 
+    wxClientData* GetClientObject() const; 
     void SetClientData(void* data);
-    /* TODO void SetClientObject(wxClientData* data); */
+    void SetClientObject(wxClientData* data);
+    */
 
     bool GetEvtHandlerEnabled() const;
     wxEvtHandler* GetNextHandler() const;
@@ -281,7 +283,7 @@ class wxCommandEvent : public wxEvent
 {
 public:
     wxCommandEvent(wxEventType commandEventType = wxEVT_NULL, int id = 0);
-    void* GetClientData() const;
+    /* TODO void* GetClientData() const; */
     /* TODO wxClientData* GetClientObject() const; */
     long GetExtraLong() const;
     int GetInt() const;
@@ -289,7 +291,7 @@ public:
     wxString GetString() const;
     bool IsChecked() const;
     bool IsSelection() const;
-    void SetClientData(void* clientData);
+    /* TODO void SetClientData(void* clientData); */
     /* TODO void SetClientObject(wxClientData* clientObject); */
     void SetExtraLong(long extraLong);
     void SetInt(int intCommand);
