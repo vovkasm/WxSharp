@@ -39,26 +39,17 @@ public:
 
 %{
 template <typename T>
-class EventPHandler {
+class RefToPtrFunc {
 public:
-    typedef std::function<void(T*)> PFunc;
-    EventPHandler(PFunc func) : _func(func) { }
+    typedef std::function<void(T*)> Func;
+    RefToPtrFunc(Func func) : _func(func) { }
     void operator()(T& event) {
         _func(&event);
     }
 private:
-    PFunc _func;
+    Func _func;
 };
 %}
-
-%define %cs_callback(TYPE, CSTYPE)
-    %typemap(ctype) TYPE, TYPE& "void*"
-    %typemap(in) TYPE  %{ $1 = ($1_type)$input; %}
-    %typemap(in) TYPE& %{ $1 = ($1_type)&$input; %}
-    %typemap(imtype, out="global::System.IntPtr") TYPE, TYPE& "CSTYPE"
-    %typemap(cstype, out="global::System.IntPtr") TYPE, TYPE& "CSTYPE"
-    %typemap(csin) TYPE, TYPE& "$csinput"
-%enddef
 
 %{
 typedef void (SWIGSTDCALL *wxCommandEventCallback)(wxCommandEvent*);
@@ -68,18 +59,23 @@ typedef void (*wxCommandEventCallback)(wxCommandEvent*);
     public delegate void CommandEventCallback(wxCommandEvent arg);
 %}
 
-%cs_callback(wxCommandEventCallback, wxsharpglue.CommandEventCallback);
+//%cs_callback(wxCommandEventCallback, wxsharpglue.CommandEventCallback);
 
 %typemap(cscode) wxEvtHandler %{
-    public void BindCommandEvent(wxsharpglue.CommandEventCallback handler) {
+    private global::System.IntPtr WrapCommandEventCallback(wxsharpglue.CommandEventCallback handler) {
         Action<IntPtr> realHandler = delegate(IntPtr arg) {
             wxCommandEvent ev = new wxCommandEvent(arg, false);
             handler(ev);
         };
         IntPtr realHandlerPtr = Marshal.GetFunctionPointerForDelegate(realHandler);
-        BindCommandEventInternal(new SWIGTYPE_p_void(realHandlerPtr, false), -1, -1);
+        return realHandlerPtr;
     }
 %}
+%typemap(ctype) wxCommandEventCallback "wxCommandEventCallback"
+%typemap(in) wxCommandEventCallback  %{ $1 = ($1_type)$input; %}
+%typemap(cstype, out="global::System.IntPtr") wxCommandEventCallback "wxsharpglue.CommandEventCallback"
+%typemap(csin) wxCommandEventCallback "WrapCommandEventCallback($csinput)"
+%typemap(imtype, out="global::System.IntPtr") wxCommandEventCallback "global::System.IntPtr"
 
 class wxEvtHandler : public wxObject
 {
@@ -87,9 +83,10 @@ public:
 
 %extend {
     #include <functional>
-    void BindCommandEventInternal(void *handler, int id = wxID_ANY, int lastId = wxID_ANY) {
-        wxCommandEventCallback cb = (wxCommandEventCallback)handler;
-        EventPHandler<wxCommandEvent> fn(cb);
+    void BindCommandEvent(wxCommandEventCallback handler) {
+        int id = wxID_ANY;
+        int lastId = wxID_ANY;
+        RefToPtrFunc<wxCommandEvent> fn(handler);
         $self->Bind(wxEVT_BUTTON, fn, id, lastId);
     }
 }
