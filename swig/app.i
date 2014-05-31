@@ -1,30 +1,21 @@
-%feature("director") wxAppConsole;
 %feature("director") wxApp;
-class wxAppConsole : public wxEvtHandler
-{
-public:
-    virtual ~wxAppConsole();
-    
-    virtual int MainLoop();
-    virtual void ExitMainLoop();
-    virtual int OnExit();
-    virtual bool OnInit();
-    virtual int OnRun();
-};
 
-class wxApp : public wxAppConsole
+class wxApp : public wxEvtHandler
 {
 public:
     wxApp();
     virtual ~wxApp();
-    //virtual wxVideoMode GetDisplayMode() const;
-    void SetExitOnFrameDelete(bool flag);
-    bool GetExitOnFrameDelete() const;
-    virtual bool IsActive() const;
-    wxWindow* GetTopWindow() const;
-    void SetTopWindow(wxWindow* window);
 
-    static void SetInstance(wxAppConsole* app);
-    static wxAppConsole* GetInstance();
+    virtual int OnExit();
+    virtual bool OnInit();
+
+    void SetExitOnFrameDelete(bool flag);
+    // TODO: getter/setter bool GetExitOnFrameDelete() const;
+
+    void SetTopWindow(wxWindow* window);
+    // TODO: getter/setter wxWindow* GetTopWindow() const;
+
+    static void SetInstance(wxApp* app);
+    // TODO: getter/setter static wxApp* GetInstance();
 };
 

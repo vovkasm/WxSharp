@@ -37,16 +37,9 @@ typedef int wxWindowID;
 
 // complements to files in wxWindows sources in interface directory
 %include defs.i
-%include gdicmn.i
 %include object.i
-%include eventfilter.i
 %include event.i
 %include app.i
 %include window.i
-%include nonownedwnd.i
-%include toplevel.i
 %include frame.i
-%include validate.i
-%include control.i
-%include anybutton.i
 %include button.i

@@ -14,19 +14,12 @@ set(CMAKE_SWIG_FLAGS "-namespace" "org.vovkasm.wx" "-DSWIG2_CSHARP")
 set_source_files_properties(wx.i PROPERTIES CPLUSPLUS ON)
 
 set(SWIG_MODULE_wxsharpglue_EXTRA_DEPS
-    anybutton.i
     app.i
     button.i
-    control.i
     defs.i
     event.i
-    eventfilter.i
     frame.i
-    gdicmn.i
-    nonownedwnd.i
     object.i
-    toplevel.i
-    validate.i
     window.i
     wx_typemaps.i
     wxstring.i
