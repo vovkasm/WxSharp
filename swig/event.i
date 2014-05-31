@@ -56,12 +56,39 @@ typedef void (SWIGSTDCALL *wxCommandEventCallback)(wxCommandEvent*);
 %}
 typedef void (*wxCommandEventCallback)(wxCommandEvent*);
 %pragma(csharp) modulecode=%{
+    public delegate void ButtonEventHandler(object sender, wxCommandEvent ev);
     public delegate void CommandEventCallback(wxCommandEvent arg);
 %}
 
 //%cs_callback(wxCommandEventCallback, wxsharpglue.CommandEventCallback);
 
+%typemap(csimports) wxEvtHandler %{
+using global::System;
+using global::System.Runtime.InteropServices;
+using global::System.ComponentModel;
+%}
 %typemap(cscode) wxEvtHandler %{
+    protected EventHandlerList eventDelegates = new EventHandlerList();
+
+    public event wxsharpglue.ButtonEventHandler ButtonEvent {
+        add {
+            int key = wxsharpglue.wxEVT_BUTTON;
+            wxsharpglue.ButtonEventHandler handler = (wxsharpglue.ButtonEventHandler)eventDelegates[key];
+            eventDelegates.AddHandler(key, value);
+            if (handler == null) {
+                // Connect
+            }
+        }
+        remove {
+            int key = wxsharpglue.wxEVT_BUTTON;
+            eventDelegates.RemoveHandler(key, value);
+            wxsharpglue.ButtonEventHandler handler = (wxsharpglue.ButtonEventHandler)eventDelegates[key];
+            if (handler == null) {
+                // Disconnect
+            }
+        }
+    }
+
     private global::System.IntPtr WrapCommandEventCallback(wxsharpglue.CommandEventCallback handler) {
         Action<IntPtr> realHandler = delegate(IntPtr arg) {
             wxCommandEvent ev = new wxCommandEvent(arg, false);
@@ -1783,5 +1810,4 @@ extern const wxEventType wxEVT_HELP;
 extern const wxEventType wxEVT_DETAILED_HELP;
 extern const wxEventType wxEVT_TOOL;
 extern const wxEventType wxEVT_WINDOW_MODAL_DIALOG_CLOSED;
-
-wxDECLARE_EXPORTED_EVENT(wxEVT_BUTTON, wxCommandEvent);
+extern const wxEventType wxEVT_BUTTON;
