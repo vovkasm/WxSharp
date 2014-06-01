@@ -1,15 +1,15 @@
 using System;
 using org.vovkasm.wx;
 
-public class MyApp : wxApp {
-    public wxFrame main_window = null;
+public class MyApp : App {
+    public Frame main_window = null;
 
     public override bool OnInit ()
     {
         Console.WriteLine ("C# OnInit called!");
-        main_window = new wxFrame(null, (int)wxStandardID.wxID_ANY, "Hello from C#");
+        main_window = new Frame(null, (int)StandardID.ID_ANY, "Hello from C#");
 
-        wxButton btnExit = new wxButton( main_window, (int)wxStandardID.wxID_HIGHEST, "Exit" );
+        Button btnExit = new Button( main_window, (int)StandardID.ID_HIGHEST, "Exit" );
         btnExit.BindCommandEvent( OnBtnExitClick );
 
         main_window.Show ();
@@ -18,7 +18,7 @@ public class MyApp : wxApp {
         return base.OnInit ();
     }
 
-    public void OnBtnExitClick (wxCommandEvent ev)
+    public void OnBtnExitClick (CommandEvent ev)
     {
         Console.WriteLine ("BtnExit clicked!");
         main_window.Close(true);
@@ -40,7 +40,7 @@ public class WxNetSample
         MyApp app = new MyApp();
 
         MyApp.SetInstance(app);
-        bool ret = wxsharpglue.wxEntry(args);
+        bool ret = wxsharpglue.Entry(args);
         if (ret)
             Console.WriteLine ("wxEntry return true, ok");
         else

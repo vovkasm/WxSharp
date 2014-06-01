@@ -1,5 +1,5 @@
 /* EventCallback */
-%pragma(csharp) modulecode="public delegate int EventDelegate(wxEvent ev);"
+%pragma(csharp) modulecode="public delegate int EventDelegate(Event ev);"
 
 %typemap(imtype) (wxEventCallback callback)  "$module.EventDelegate"
 %typemap(cstype) (wxEventCallback callback) "$module.EventDelegate"

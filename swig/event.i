@@ -6,12 +6,12 @@ enum wxEventPropagation
 
 enum wxEventCategory
 {
-    wxEVT_CATEGORY_UI = 1,
-    wxEVT_CATEGORY_USER_INPUT = 2,
-    wxEVT_CATEGORY_SOCKET = 4,
-    wxEVT_CATEGORY_TIMER = 8,
-    wxEVT_CATEGORY_THREAD = 16,
-    wxEVT_CATEGORY_ALL = wxEVT_CATEGORY_UI|wxEVT_CATEGORY_USER_INPUT|wxEVT_CATEGORY_SOCKET|wxEVT_CATEGORY_TIMER|wxEVT_CATEGORY_THREAD
+    EVT_CATEGORY_UI = 1,
+    EVT_CATEGORY_USER_INPUT = 2,
+    EVT_CATEGORY_SOCKET = 4,
+    EVT_CATEGORY_TIMER = 8,
+    EVT_CATEGORY_THREAD = 16,
+    EVT_CATEGORY_ALL = EVT_CATEGORY_UI|EVT_CATEGORY_USER_INPUT|EVT_CATEGORY_SOCKET|EVT_CATEGORY_TIMER|EVT_CATEGORY_THREAD
 };
 
 class wxEvent : public wxObject
@@ -40,8 +40,8 @@ typedef void (SWIGSTDCALL *wxCommandEventCallback)(wxCommandEvent*);
 %}
 typedef void (*wxCommandEventCallback)(wxCommandEvent*);
 %pragma(csharp) modulecode=%{
-    public delegate void ButtonEventHandler(object sender, wxCommandEvent ev);
-    public delegate void CommandEventCallback(wxCommandEvent arg);
+    public delegate void ButtonEventHandler(object sender, CommandEvent ev);
+    public delegate void CommandEventCallback(CommandEvent arg);
 %}
 
 //%cs_callback(wxCommandEventCallback, wxsharpglue.CommandEventCallback);
@@ -56,7 +56,7 @@ using global::System.ComponentModel;
 
     public event wxsharpglue.ButtonEventHandler ButtonEvent {
         add {
-            int key = wxsharpglue.wxEVT_BUTTON;
+            int key = wxsharpglue.EVT_BUTTON;
             wxsharpglue.ButtonEventHandler handler = (wxsharpglue.ButtonEventHandler)eventDelegates[key];
             eventDelegates.AddHandler(key, value);
             if (handler == null) {
@@ -64,7 +64,7 @@ using global::System.ComponentModel;
             }
         }
         remove {
-            int key = wxsharpglue.wxEVT_BUTTON;
+            int key = wxsharpglue.EVT_BUTTON;
             eventDelegates.RemoveHandler(key, value);
             wxsharpglue.ButtonEventHandler handler = (wxsharpglue.ButtonEventHandler)eventDelegates[key];
             if (handler == null) {
@@ -75,7 +75,7 @@ using global::System.ComponentModel;
 
     private global::System.IntPtr WrapCommandEventCallback(wxsharpglue.CommandEventCallback handler) {
         Action<IntPtr> realHandler = delegate(IntPtr arg) {
-            wxCommandEvent ev = new wxCommandEvent(arg, false);
+            CommandEvent ev = new CommandEvent(arg, false);
             handler(ev);
         };
         IntPtr realHandlerPtr = Marshal.GetFunctionPointerForDelegate(realHandler);

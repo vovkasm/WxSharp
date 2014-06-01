@@ -17,15 +17,17 @@ typedef wchar_t __WCHAR_TYPE__;
 CSHARP_ARRAYS(wxChar*, string)
 %typemap(imtype, inattributes="[In, MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0, ArraySubType=UnmanagedType.LPStr)]") wxChar *INPUT[] "string[]"
 
+%rename("%(strip:[wx])s") "";
+
 %apply wxChar *INPUT[] { wxChar** argv }
 
 %include wxstring.i
 %include wx_typemaps.i
 
 %pragma(csharp) modulecode = %{
-    public static bool wxEntry(string[] argv)
+    public static bool Entry(string[] argv)
     {
-        return wxEntry(argv.Length, argv);
+        return Entry(argv.Length, argv);
     }
 %}
 
