@@ -15,7 +15,16 @@ public:
     void SetTopWindow(wxWindow* window);
     // TODO: getter/setter wxWindow* GetTopWindow() const;
 
-    static void SetInstance(wxApp* app);
+    // static void SetInstance(wxApp* app);
     // TODO: getter/setter static wxApp* GetInstance();
+
+%extend {
+    static bool Run(wxApp* app) {
+        wxApp::SetInstance(app);
+        int argc = 0;
+        return wxEntry(argc, (wxChar**)NULL);
+    }
+}
+
 };
 

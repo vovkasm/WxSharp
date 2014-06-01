@@ -24,15 +24,6 @@ CSHARP_ARRAYS(wxChar*, string)
 %include wxstring.i
 %include wx_typemaps.i
 
-%pragma(csharp) modulecode = %{
-    public static bool Entry(string[] argv)
-    {
-        return Entry(argv.Length, argv);
-    }
-%}
-
-bool wxEntry(int argc, wxChar** argv);
-
 // interface/windowid.h
 
 typedef int wxWindowID;

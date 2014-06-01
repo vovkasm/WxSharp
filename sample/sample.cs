@@ -36,11 +36,7 @@ public class WxNetSample
 {
     static public void Main ()
     {
-        string[] args = new string[0];
-        MyApp app = new MyApp();
-
-        MyApp.SetInstance(app);
-        bool ret = wxsharpglue.Entry(args);
+        bool ret = App.Run(new MyApp());
         if (ret)
             Console.WriteLine ("wxEntry return true, ok");
         else
