@@ -27,5 +27,6 @@ if(NOT LIBRARY_OUTPUT_PATH)
     mark_as_advanced(LIBRARY_OUTPUT_PATH)
 endif()
 
+add_subdirectory(wxc)
 add_subdirectory(swig)
 add_subdirectory(sample)
