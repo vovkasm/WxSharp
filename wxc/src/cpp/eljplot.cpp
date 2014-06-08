@@ -1,4 +1,7 @@
 #include "wrapper.h"
+
+#if (wxVERSION_NUMBER < 3000)
+
 #if wxVERSION_NUMBER >= 2400
 	#include "wx/plot/plot.h"
 #else
@@ -315,3 +318,5 @@ EWXWEXPORT(void,wxPlotEvent_SetPosition)(void* _obj, int pos)
 }
 	
 }
+
+#endif

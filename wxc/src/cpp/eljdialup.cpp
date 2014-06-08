@@ -1,6 +1,8 @@
 #include "wrapper.h"
 #include "wx/dialup.h"
 
+#if wxUSE_DIALUP_MANAGER
+
 extern "C"
 {
 
@@ -100,3 +102,5 @@ EWXWEXPORT(bool,wxDialUpEvent_IsOwnEvent)(wxDialUpEvent* self)
 }
 
 }
+
+#endif // wxUSE_DIALUP_MANAGER
