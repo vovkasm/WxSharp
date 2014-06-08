@@ -289,9 +289,9 @@ EWXWEXPORT(void,wxJoystick_SetMovementThreshold)(void* _obj,int threshold)
 {
 }
 	
-EWXWEXPORT(bool,wxJoystick_IsOk)(wxJoystick* _obj)
+EWXWEXPORT(bool,wxJoystick_IsOk)(void* _obj)
 {
-	return _obj->isOk();
+	return 0;
 }
 	
 EWXWEXPORT(int,wxJoystick_GetNumberJoysticks)(void* _obj)
