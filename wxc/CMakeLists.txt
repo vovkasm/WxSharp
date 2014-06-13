@@ -1,5 +1,4 @@
 find_package(wxWidgets REQUIRED)
-message("include: ${wxWidgets_USE_FILE}")
 include(${wxWidgets_USE_FILE})
 
 set(WXC_SOURCES
